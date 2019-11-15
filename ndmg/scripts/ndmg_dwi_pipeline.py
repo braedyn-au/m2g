@@ -200,6 +200,9 @@ def ndmg_dwi_worker(
 
     # Perform eddy correction
     dwi_prep = f'{namer.dirs["output"]["prep_dwi"]}/eddy_corrected_data.nii.gz'
+    print(len(os.listdir(namer.dirs["output"]["prep_dwi"])))
+    print(dwi_prep)
+    print(os .istdir(name.dirnamer.dirs["output"]["prep_dwi"]))
 
     if len(os.listdir(namer.dirs["output"]["prep_dwi"])) != 0:
         if skipeddy is False:
