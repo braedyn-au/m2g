@@ -62,7 +62,7 @@ script:
   # Run ndmg in docker, run pytest in docker.
   # top command is to prevent travis from breaking at eddy_correct
   - while sleep 9m; do echo "=====[ $SECONDS seconds still running ]====="; done &
-  -|
+  - |
     if [$VOX==2]; then
       docker exec -w /ndmg travis ndmg --sp $SP --mod $MOD --participant_label 0025864 --session_label $SES --voxelsize $VOX"mm" --parcellation desikan --seeds 1 /input /output
     fi
