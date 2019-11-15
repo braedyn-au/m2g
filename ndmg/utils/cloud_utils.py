@@ -6,7 +6,6 @@ Contains utility functions for working on the cloud with AWS.
 """
 
 # standard library imports
-import subprocess
 from configparser import ConfigParser
 import os
 import sys
@@ -236,4 +235,3 @@ def s3_push_data(bucket, remote, outDir, modifier, creds=True):
                     f"{remote}/{modifier}{os.path.join(spath,file_)}",
                     ExtraArgs={"ACL": "public-read"},
                 )
-
