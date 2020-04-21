@@ -85,7 +85,7 @@ class qa_mri(object):
             scan_id:
                 - the id of the subject.
         """
-        print "Performing QA for Functional Preprocessing..."
+        print( "Performing QA for Functional Preprocessing...")
         func_name = mgu.get_filename(prep.preproc_func)
 
         raw_im = nb.load(prep.func)
@@ -193,7 +193,7 @@ class qa_mri(object):
             - qa_dir:
                 - the directory to place figures.
         """
-        print "Performing QA for Anatoical Preprocessing..."
+        print( "Performing QA for Anatoical Preprocessing...")
         figs = {}
         # produce plots for the raw anatomical image
         figs['raw_anat'] = plot_brain(prep.anat)
@@ -218,7 +218,7 @@ class qa_mri(object):
             freg:
                 - the func_register object from registration.
         """
-        print "Performing QA for Self-Registration..."
+        print( "Performing QA for Self-Registration...")
         # overlap statistic for the functional and anatomical
         # skull-off brains
         (sreg_sc, sreg_fig) = registration_score(
@@ -281,7 +281,7 @@ class qa_mri(object):
             freg:
                 - the functional registration object.
         """
-        print "Performing QA for Template-Registration..."
+        print( "Performing QA for Template-Registration...")
         # overlap statistic and plot btwn template-aligned fmri
         # and the atlas brain that we are aligning to
         (treg_sc, treg_fig) = registration_score(
@@ -381,7 +381,7 @@ class qa_mri(object):
             nuisobj:
                 - the nuisance correction object.
         """
-        print "Performing QA for Nuisance..."
+        print( "Performing QA for Nuisance...")
         qcadir = self.namer.dirs['qa']['nuis_a']
         qcfdir = self.namer.dirs['qa']['nuis_f']
         maskdir = "{}/{}".format(qcadir, "masks")
@@ -506,7 +506,7 @@ class qa_mri(object):
         """
         label_name = self.namer.get_label(label)
         qcdir = self.namer.dirs['qa']['conn'][label_name]
-        print "Performing QA for ROI Analysis..."
+        print( "Performing QA for ROI Analysis...")
         cmd = "mkdir -p {}".format(qcdir)
         mgu.execute_cmd(cmd)
 
@@ -541,7 +541,7 @@ class qa_mri(object):
             qcdir:
                 - the directory to place qc in.
         """
-        print "Performing QA for Voxel Timeseries..."
+        print( "Performing QA for Voxel Timeseries...")
         qcdir = self.namer.dirs['qa']['ts_voxel']
         # plot the voxelwise signal with respect to the atlas to
         # get an idea of how well the fmri is masked

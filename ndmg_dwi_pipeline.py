@@ -28,11 +28,11 @@ from ndmg.stats.qa_regdti import *
 from ndmg.stats.qa_tensor import *
 from ndmg.stats.qa_fibers import *
 from ndmg.stats.qa_mri import qa_mri
-from ndmg import utils as mgu
-from ndmg import register as mgr
-from ndmg import track as mgt
-from ndmg import graph as mgg
-from ndmg import preproc as mgp
+import ndmg.utils as mgu
+import ndmg.register as mgr
+import ndmg.track as mgt
+import ndmg.graph as mgg
+import ndmg.preproc as mgp
 import numpy as np
 import nibabel as nb
 import os

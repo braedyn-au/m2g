@@ -503,11 +503,11 @@ class epi_register(register):
             self.treg_strat = 'fnirt'  # strategy details
         else:
             # if we dont have 2mm mni or a low quality t1w, FNIRT is unsuitable
-            print "Atlas is not 2mm MNI, or input is low quality."
-            print "Using linear template registration."
+            print( "Atlas is not 2mm MNI, or input is low quality.")
+            print( "Using linear template registration.")
 
             xfm_epi2temp = "{}/{}_xfm_epi2temp.mat".format(
-                self.outdir['reg_m'],
+                    self.outdir['reg_m'],
                 self.epi_name
             )
             # just combine our 12 dof linear transform from t1w to template

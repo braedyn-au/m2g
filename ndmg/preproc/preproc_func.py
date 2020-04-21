@@ -99,7 +99,7 @@ class preproc_func():
             cmd += " -r {}".format(tr)
             mgu.execute_cmd(cmd, verb=True)
         else:
-            print "Skipping slice timing correction."
+            print( "Skipping slice timing correction.")
 
     def preprocess(self, stc=None, trim=15):
         """

@@ -29,7 +29,7 @@ from ndmg.stats.qa_reg import plot_overlays
 import plotly as py
 import plotly.offline as offline
 from plotly.graph_objs import Heatmap
-import plotly_helper as pp
+import ndmg.stats.plotly_helper as pp
 
 
 def dice_coefficient(a, b):
@@ -255,39 +255,35 @@ def plot_timeseries(timeseries, fname_ts, sub, label_name):
                         y=timeseries.T[:, d], mode='lines'))
     # use plotly so that users can select which rois to display
     # easily with a html
-	layout = dict(title="Functional Timeseries, {} Parcellation".format(label_name),
-                  xaxis=dict(title='Time Point (TRs)',
-                             range=[0, timeseries.T.shape[0]]),
-                  yaxis=dict(title='Intensity'),
-                  showlegend=False)  # height=405, width=720)
+    layout = dict(title="Functional Timeseries, {} Parcellation".format(label_name), xaxis=dict(title='Time Point (TRs)',range=[0, timeseries.T.shape[0]]),yaxis=dict(title='Intensity'),showlegend=False)  # height=405, width=720)
     fts = dict(data=fts_list, layout=layout)
     offline.plot(fts, filename=fname_ts, auto_open=False)
     pass
 
 def plot_connectome(connectome, fname_corr, sub, label_name):
-    """
-    A function to generate a plot of the timeseries
-    of the particular ROI. Makes sure nothing nonsensical is
-    happening here.
+   """
+   A function to generate a plot of the timeseries
+   of the particular ROI. Makes sure nothing nonsensical is
+   happening here.
 
-    **Positional Arguments:**
-        - timeseries:
-            - the path to a roi timeseries.
-        - qcdir:
-            - the directory to place quality control figures.
-    """
-    # plot correlation matrix as the absolute correlation
-    # of the timeseries for each roi
-    dims = connectome.shape[0]
-    fig = pp.plot_heatmap(connectome/np.max(connectome),
-        name = "Functional Connectome, {} Parcellation".format(label_name),
-        scale = True, scaletit='Normalized Rank')
-    fig.layout['xaxis']['title'] = 'ROI'
-    fig.layout['yaxis']['title'] = 'ROI'
-    fig.layout['yaxis']['autorange'] = 'reversed'
-    fig.layout['xaxis']['tickvals'] = [0, dims/2-1, dims-1]
-    fig.layout['yaxis']['tickvals'] = [0, dims/2-1, dims-1]
-    fig.layout['xaxis']['ticktext'] = [1, dims/2, dims]
-    fig.layout['yaxis']['ticktext'] = [1, dims/2, dims]
-    offline.plot(fig, filename=fname_corr, auto_open=False)
-    pass
+   **Positional Arguments:**
+       - timeseries:
+           - the path to a roi timeseries.
+       - qcdir:
+           - the directory to place quality control figures.
+   """
+   # plot correlation matrix as the absolute correlation
+   # of the timeseries for each roi
+   dims = connectome.shape[0]
+   fig = pp.plot_heatmap(connectome/np.max(connectome), 
+       name = "Functional Connectome, {} Parcellation".format(label_name),
+       scale = True, scaletit='Normalized Rank')
+   fig.layout['xaxis']['title'] = 'ROI'
+   fig.layout['yaxis']['title'] = 'ROI'
+   fig.layout['yaxis']['autorange'] = 'reversed'
+   fig.layout['xaxis']['tickvals'] = [0, dims/2-1, dims-1]
+   fig.layout['yaxis']['tickvals'] = [0, dims/2-1, dims-1]
+   fig.layout['xaxis']['ticktext'] = [1, dims/2, dims]
+   fig.layout['yaxis']['ticktext'] = [1, dims/2, dims]
+   offline.plot(fig, filename=fname_corr, auto_open=False)
+   pass

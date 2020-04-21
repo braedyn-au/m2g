@@ -150,7 +150,7 @@ def ndmg_func_worker(func, t1w, atlas, atlas_brain, atlas_mask, lv_mask,
     qc_func = qa_mri(namer, 'func')  # for quality control
     # Align fMRI volumes to Atlas
     # -------- Preprocessing Steps --------------------------------- #
-    print "Preprocessing volumes..."
+    print( "Preprocessing volumes...")
     f_prep = mgfp(func, preproc_func, motion_func, namer.dirs['tmp']['prep_m'])
     f_prep.preprocess(stc=stc)
     try:
@@ -165,7 +165,7 @@ def ndmg_func_worker(func, t1w, atlas, atlas_brain, atlas_mask, lv_mask,
         print("Exception in Preprocessing QA.")
 
     # ------- Alignment Steps -------------------------------------- #
-    print "Aligning volumes..."
+    print( "Aligning volumes...")
     func_reg = mgreg(preproc_func, t1w, preproc_t1w_brain,
                      atlas, atlas_brain, atlas_mask, aligned_func,
                      aligned_t1w, namer)
@@ -181,7 +181,7 @@ def ndmg_func_worker(func, t1w, atlas, atlas_brain, atlas_mask, lv_mask,
         print("Exception in Template Registration QA.")
 
     # ------- Nuisance Correction Steps ---------------------------- #
-    print "Correcting Nuisance Variables..."
+    print( "Correcting Nuisance Variables...")
     nuis = mgn(aligned_func, aligned_t1w, nuis_func, namer.dirs['tmp'],
                lv_mask=lv_mask, mc_params=f_prep.mc_params)
     nuis.nuis_correct()
@@ -192,7 +192,7 @@ def ndmg_func_worker(func, t1w, atlas, atlas_brain, atlas_mask, lv_mask,
 
     # ------ Voxelwise Timeseries Steps ---------------------------- #
     if big:
-        print "Extracting Voxelwise Timeseries..."
+        print( "Extracting Voxelwise Timeseries...")
         voxel = mgts().voxel_timeseries(nuis_func, atlas_mask, voxel_ts)
         try:
             qc_func.voxel_ts_qa(voxel, nuis_func, atlas_mask)
@@ -263,13 +263,13 @@ def ndmg_func_pipeline(func, t1w, atlas, atlas_brain, atlas_mask, lv_mask,
         ndmg_func_worker(func, t1w, atlas, atlas_brain, atlas_mask, lv_mask,
                          labels, outdir, clean=clean, stc=stc,
                          big=big)
-    except Exception, e:
+    except (Exception, e):
         print(traceback.format_exc())
         os.exit() 
     finally:
         try:
             os.exit()
-        except Exception, e:
+        except (Exception, e):
             os.exit()
     return
 
@@ -316,8 +316,8 @@ def main():
                 result.stc = result.stc_file
 
     # Create output directory
-    print "Creating output directory: {}".format(result.outdir)
-    print "Creating output temp directory: {}/tmp".format(result.outdir)
+    print( "Creating output directory: {}".format(result.outdir))
+    print( "Creating output temp directory: {}/tmp".format(result.outdir))
     mgu.execute_cmd("mkdir -p {} {}/tmp".format(result.outdir, result.outdir))
 
     ndmg_func_pipeline(result.func, result.t1w, result.atlas,

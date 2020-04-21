@@ -63,9 +63,9 @@ class biggraph(object):
 
         print_id = np.max((int(nlines*0.05), 1))  # in case nlines*.05=0
         for idx, streamline in enumerate(streamlines):
-            if (idx % print_id) == 0:
-                print(idx)
- 
+            #if (idx % print_id) == 0:
+            print(idx)
+
             points = np.round(streamline).astype(int)
             p = set()
             for point in points:
@@ -73,17 +73,20 @@ class biggraph(object):
                     loc = XYZMorton(tuple(point))
                 except IndexError:
                     pass
+                    print(".i")
                 else:
                     pass
-
+                    print(".e")
                 if loc:
                     p.add(loc)
+                    
 
             edges = combinations(p, 2)
             for edge in edges:
                 # use string here for overflow issues
                 lst = tuple([str(node) for node in edge])
                 self.edge_dict[tuple(sorted(lst))] += 1
+        print("Loop Done")
 
         self.edge_list = [(k[0], k[1], v) for k, v in self.edge_dict.items()]
         pass
